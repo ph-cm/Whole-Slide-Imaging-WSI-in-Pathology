@@ -43,3 +43,18 @@ ON_GPU = True
 def supress_console_output():
     return contextlib.redirect_stderr(io.StringIO())
 
+
+#CLean-up before a run
+warnings.filterwarnings("ignore")
+global_save_dir = Path("./tmp/")
+
+def rmdir(dir_path: str | Path) -> None:
+    if Path(dir_path).is_dir():
+        shutil.rmtree(dir_path)
+        logger.info("Removing directory %s", dir_path)
+        
+rmdir(global_save_dir)
+global_save_dir.mkdir()
+logger.info("Creating new directory %s", global_save_dir)
+
+
