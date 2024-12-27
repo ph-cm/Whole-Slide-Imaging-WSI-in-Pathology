@@ -32,7 +32,7 @@ The use of **patch-level predictions in digital pathology** is a critical advanc
 TIAToolbox represents a significant step forward in automating and scaling digital pathology workflows. By providing tools to perform patch-level predictions, aggregate results into meaningful maps, and visualize outcomes, it bridges the gap between computational pathology and clinical applications. These capabilities are instrumental in advancing cancer diagnostics, treatment planning, and biomedical research.
 
 
-#About the application
+##About the application
 
 In this example, we will show how to use TIAToolbox for patch-level prediction using a range of deep learning models. TIAToolbox can be used to make predictions on pre-extracted image patches or on larger image tiles / whole-slide images (WSIs), where image patches are extracted on the fly. WSI patch-level predictions can subsequently be aggregated to obtain a segmentation map. In particular, we will introduce the use of our module `patch_predictor`. A full list of the available models trained and provided in TIAToolbox for patch-level prediction is given below.
 
