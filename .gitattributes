@@ -1,2 +1,0 @@
-tmp/kather100k-validation-sample.zip filter=lfs diff=lfs merge=lfs -text
-tmp/sample_wsi.svs filter=lfs diff=lfs merge=lfs -text
