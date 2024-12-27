@@ -2,7 +2,7 @@
 
 # About this demo
 
-In this example, we will show how to use TIAToolbox for patch-level prediction using a range of deep learning models. TIAToolbox can be used to make predictions on pre-extracted image patches or on larger image tiles / whole-slide images (WSIs), where image patches are extracted on the fly. WSI patch-level predictions can subsequently be aggregated to obtain a segmentation map. In particular, we will introduce the use of our module `patch_predictor` ([details](details)). A full list of the available models trained and provided in TIAToolbox for patch-level prediction is given below.
+In this example, we will show how to use TIAToolbox for patch-level prediction using a range of deep learning models. TIAToolbox can be used to make predictions on pre-extracted image patches or on larger image tiles / whole-slide images (WSIs), where image patches are extracted on the fly. WSI patch-level predictions can subsequently be aggregated to obtain a segmentation map. In particular, we will introduce the use of our module `patch_predictor`. A full list of the available models trained and provided in TIAToolbox for patch-level prediction is given below.
 
 # Importing related libraries
 
@@ -16,7 +16,7 @@ We download, over the internet, image files used for the purpose of this noteboo
 
 Below we use `tiatoolbox` to obtain the model predictions for a set of patches with a pretrained model.
 
-We use patches from the validation subset of the [Kather 100k dataset](Kather_100k). This dataset has already been downloaded in the download section above. We first read the data and convert it to a suitable format. In particular, we create a list of patches and a list of corresponding labels. For example, the first label in `label_list` will indicate the class of the first image patch in `patch_list`.
+We use patches from the validation subset of the Kather 100k dataset. This dataset has already been downloaded in the download section above. We first read the data and convert it to a suitable format. In particular, we create a list of patches and a list of corresponding labels. For example, the first label in `label_list` will indicate the class of the first image patch in `patch_list`.
 
 # Patch Dataset Classes and Labels
 
@@ -43,7 +43,7 @@ Now that we have the list of images, we can use TIAToolbox's `PatchPredictor` to
 The first line creates a CNN-based patch classifier instance based on the arguments and prepares a CNN model (generates the network, downloads pretrained weights, etc.). The CNN model used in this predictor can be defined using the `pretrained_model` argument. A complete list of supported pretrained classification models, that have been trained on the Kather 100K dataset, is reported in the first section of this notebook. `PatchPredictor` also enables you to use your own pretrained models for your specific classification application. In order to do that, you might need to change some input arguments for `PatchPredictor`, as we now explain:
 
 - **model**: Use an externally defined PyTorch model for prediction, with weights already loaded. This is useful when you want to use your own pretrained model on your own data. The only constraint is that the input model should follow `tiatoolbox.models.abc.ModelABC` class structure. For more information on this matter, please refer to our example notebook on advanced model techniques.
-- **pretrained_model**: This argument has already been discussed above. With it, you can tell tiatoolbox to use one of its pretrained models for the prediction task. A complete list of pretrained models can be found [here](here). If both `model` and `pretrained_model` arguments are used, then `pretrained_model` is ignored. In this example, we used `resnet18-kather100k`, which means that the model architecture is an 18-layer ResNet, trained on the Kather100k dataset.
+- **pretrained_model**: This argument has already been discussed above. With it, you can tell tiatoolbox to use one of its pretrained models for the prediction task. If both `model` and `pretrained_model` arguments are used, then `pretrained_model` is ignored. In this example, we used `resnet18-kather100k`, which means that the model architecture is an 18-layer ResNet, trained on the Kather100k dataset.
 - **pretrained_weight**: When using a `pretrained_model`, the corresponding pretrained weights will also be downloaded by default. You can override the default with your own set of weights via the `pretrained_weight` argument.
 - **batch_size**: Number of images fed into the model each time. Higher values for this parameter require a larger (GPU) memory capacity.
 - 
@@ -65,7 +65,7 @@ We now demonstrate how to obtain patch-level predictions for a large image tile.
 
 As the `predict` function can accept multiple tiles in the input to be processed and each input tile has potentially many patches, we save results in a file when more than one image is provided. This is done to avoid any problems with limited computer memory. However, if only one image is provided, the results will be returned as in `patch` mode.
 
-Now, we try this function on a sample image tile. For this example, we use a tile that was released with the [Kather et al. 2016](Kather_et_al_2016) paper. It has been already downloaded in the Download section of this notebook.
+Now, we try this function on a sample image tile. For this example, we use a tile that was released with the Kather et al. 2016 paper. It has been already downloaded in the Download section of this notebook.
 
 # Patch-Level Prediction in 2 Lines of Code for Big Histology Tiles
 
@@ -123,7 +123,7 @@ We introduce some new arguments for the `predict` method:
 
 - **mode**: Set to `wsi` when analyzing whole-slide images.
 - **ioconfig**: Set the IO configuration information using the `IOPatchPredictorConfig` class.
-- **resolution** and **unit** (not shown above): These arguments specify the level or micron-per-pixel resolution of the WSI levels from which we plan to extract patches and can be used instead of `ioconfig`. Here we specify the WSI's level as `'baseline'`, which is equivalent to level 0. In general, this is the level of greatest resolution. In this particular case, the image has only one level. More information can be found in the [documentation](documentation).
+- **resolution** and **unit** (not shown above): These arguments specify the level or micron-per-pixel resolution of the WSI levels from which we plan to extract patches and can be used instead of `ioconfig`. Here we specify the WSI's level as `'baseline'`, which is equivalent to level 0. In general, this is the level of greatest resolution. In this particular case, the image has only one level. More information can be found in the documentation.
 - **masks**: A list of paths corresponding to the masks of WSIs in the `imgs` list. These masks specify the regions in the original WSIs from which we want to extract patches. If the mask of a particular WSI is specified as `None`, then the labels for all patches of that WSI (even background regions) would be predicted. This could cause unnecessary computation.
 - **merge_predictions**: You can set this parameter to `True` if you wish to generate a 2D map of patch classification results. However, for big WSIs, you might need a large amount of memory available to do this on the file. An alternative (default) solution is to set `merge_predictions=False`, and then generate the 2D prediction maps using the `merge_predictions` function as you will see later on.
 
@@ -140,7 +140,7 @@ In this notebook, we show how we can use the `PatchPredictor` class and its `pre
 
 All the processes take place within TIAToolbox, and you can easily put the pieces together by following our example code. Just make sure to set inputs and options correctly. We encourage you to further investigate the effect on the prediction output of changing `predict` function parameters. 
 
-Furthermore, if you want to use your own pretrained model for patch classification in the TIAToolbox framework (even if the model structure is not defined in the TIAToolbox model class), you can follow the instructions in our example notebook on [advanced model techniques](advanced_model_techniques) to gain some insights and guidance.
+Furthermore, if you want to use your own pretrained model for patch classification in the TIAToolbox framework (even if the model structure is not defined in the TIAToolbox model class), you can follow the instructions in our example notebook on advanced model techniques to gain some insights and guidance.
 
 
 
