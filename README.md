@@ -1,6 +1,38 @@
 # Whole-Slide-Imaging-WSI-in-Pathology
 
-# About this demo
+# Patch-Level Predictions Using TIAToolbox
+
+The **TIAToolbox** is a versatile framework designed to facilitate patch-level predictions in computational pathology, supporting tasks such as image segmentation, classification, and analysis of histology images. This toolkit is particularly valuable in analyzing large image tiles or whole-slide images (WSIs), enabling efficient processing of high-resolution medical images by dividing them into smaller patches and aggregating predictions.
+
+## Key Concepts
+- **Patch-Level Predictions**: Analyze smaller image patches extracted from large histology tiles or WSIs. These patches are processed independently, and predictions are aggregated to create a comprehensive prediction map for the entire image.
+- **Prediction Modes**:
+  - `patch`: Processing individual pre-extracted patches.
+  - `tile`: Dividing large tiles into smaller overlapping patches.
+  - `wsi`: Analyzing whole-slide images by systematically extracting patches.
+- **Pretrained Models**: Utilize pretrained models, such as ResNet-based architectures trained on datasets like Kather100K, enabling high accuracy without requiring training from scratch.
+- **Visualization Tools**: Functions like `overlay_prediction_mask` allow visualization of prediction results as overlays on original images, making it easier to interpret and evaluate results.
+
+## Examples Demonstrated
+1. **Patch Predictions**: Process individual patches from the Kather100K dataset to predict histological tissue types such as lymphocytes, smooth muscle, and tumor epithelium.
+2. **Tile Analysis**: Analyze large tiles (e.g., 5000x5000 pixels) by dividing them into smaller patches to generate prediction maps, showing the spatial distribution of various tissue types.
+3. **WSI Analysis**: Process whole-slide images using `IOPatchPredictorConfig` to configure parameters like resolution, stride, and input shape.
+4. **Prediction Map Merging**: Use the `merge_predictions` function to aggregate individual patch predictions and create seamless prediction maps across large regions.
+5. **Visualization**: Overlay prediction maps on original WSIs with `overlay_patch_prediction` for clearer interpretation.
+
+## Importance of the Subject
+The use of **patch-level predictions in digital pathology** is a critical advancement in medical image analysis. It offers:
+1. **Efficient Processing**: Break large and complex images into manageable units, enabling high-throughput analysis.
+2. **Improved Accuracy**: Reduce errors and enhance the precision of histological classifications using pretrained models and systematic patch-based processing.
+3. **Visualization and Interpretation**: Create prediction maps to better understand spatial relationships and tissue heterogeneity within a slide.
+4. **Versatility**: Customize the framework for different datasets, model architectures, and specific clinical or research applications.
+5. **Accessibility**: Built-in tools for configuration, training, and visualization make the framework usable even for users with minimal expertise in machine learning.
+
+## Conclusion
+TIAToolbox represents a significant step forward in automating and scaling digital pathology workflows. By providing tools to perform patch-level predictions, aggregate results into meaningful maps, and visualize outcomes, it bridges the gap between computational pathology and clinical applications. These capabilities are instrumental in advancing cancer diagnostics, treatment planning, and biomedical research.
+
+
+#About the application
 
 In this example, we will show how to use TIAToolbox for patch-level prediction using a range of deep learning models. TIAToolbox can be used to make predictions on pre-extracted image patches or on larger image tiles / whole-slide images (WSIs), where image patches are extracted on the fly. WSI patch-level predictions can subsequently be aggregated to obtain a segmentation map. In particular, we will introduce the use of our module `patch_predictor`. A full list of the available models trained and provided in TIAToolbox for patch-level prediction is given below.
 
